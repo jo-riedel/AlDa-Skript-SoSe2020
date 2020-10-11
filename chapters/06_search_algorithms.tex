@@ -1,6 +1,5 @@
 
-\chapter*{6 Suchen}
-\addcontentsline{toc}{chapter}{6 Suchen}
+\chapter{Suchen}
 Viele Arten von Suchen:
 \begin{itemize}
     \item \textbf{Schlüsselsuche}: suche Elemente, deren Schlüssel einem vorgegebenen Schlüssel entspricht
@@ -9,8 +8,7 @@ Viele Arten von Suchen:
     \item $\underline{\text{Graphensuche}}$: suche einen Weg von einem gegebenen Knoten zu einem anderen (z.B. Navigationsprogramm)
 \end{itemize}
 
-\section*{6.1 Schlüsselsuche}
-\addcontentsline{toc}{section}{6.1 Schlüsselsuche}
+\section{Schlüsselsuche}
 
 \subsection*{naive Methode: sequentielle Suche}
 Vorbedingungen:
@@ -94,8 +92,7 @@ def sequential_search(a, target_key):   #Komplexitaet:
         ungünstig: Datenarray ändert sich häufig (Einfügen oder Löschen von Elementen)\\
         $\Rightarrow$ Sortieraufwand amortisiert sich nicht $\Rightarrow$ Suchbäume oder Hashtabelle verwenden
 
-        \section*{6.2 Suchbäume}
-        \addcontentsline{toc}{section}{6.2 Suchbäume}
+        \section{Suchbäume}
 
         \begin{itemize}
             \item effiziente Suche, wenn der Datenbestand sich häufig ändert
@@ -291,14 +288,12 @@ $\Rightarrow$ ungünstiger Fall: key wird am Ende des längsten Pfades gefunden 
     \end{minipage}
 \end{figure}
 
-\subsection*{6.2.1 Balance des Baumes:}
-\addcontentsline{toc}{subsection}{6.2.1 Balance des Baumes}
+\subsection{Balance des Baumes:}
 Differenz zwischen kürzestem und längstem RS-Pfad
 
 \includegraphics[width=15cm,height=5cm,keepaspectratio]{./Pictures/Kettenbalance.png}
 
-\subsubsection*{6.2.2 Vollständiger Baum:}
-\addcontentsline{toc}{subsection}{6.2.2 Vollständiger Baum}
+\subsubsection{Vollständiger Baum:}
 B = 0 $\rightarrow$ alle Knoten haben entweder 2 oder 0 Kinder
 
 \begin{figure}[htbp]
@@ -315,8 +310,7 @@ B = 0 $\rightarrow$ alle Knoten haben entweder 2 oder 0 Kinder
     \end{minipage}
 \end{figure}
 
-\subsubsection*{6.2.3 Perfekt balancierter Baum}
-\addcontentsline{toc}{subsection}{6.2.3 Perfekt balancierter Baum}
+\subsubsection{Perfekt balancierter Baum}
 B $\leq$ 1 \\
 $\Rightarrow$ für jeden Knoten gilt:
 \begin{figure}[htbp]
@@ -334,8 +328,7 @@ $\Rightarrow$ für jeden Knoten gilt:
     \end{minipage}
 \end{figure}
 
-\section*{6.3 Balance von Suchbäumen}
-\addcontentsline{toc}{section}{6.3 Balance von Suchbäumen}
+\section{Balance von Suchbäumen}
 B = (längster Pfad Wurzel $\rightarrow$ Sentinel) - (kürzester Pfad Wurzel $\rightarrow$ Sentinel)
 
 \begin{figure}[htbp]
@@ -416,8 +409,7 @@ Beispiel: AVL-Bäume
     \end{itemize}
 \end{itemize}
 
-\section*{6.4 Anderson-Bäume}
-\addcontentsline{toc}{section}{6.4 Anderson-Bäume}
+\section{Anderson-Bäume}
 Idee: jeder Knoten hat ein \emph{level} $\widehat{=}$ Abstand (kürzester Pfad) zum None-Sentinel
 
 \begin{minted}{python}
@@ -493,8 +485,7 @@ def anderson_tree_insert(node, key):
 
 \includegraphics[width=16cm,height=3cm,keepaspectratio]{./Pictures/AndersonPython2.png}
 
-\section*{6.5 Prioritätssuche}
-\addcontentsline{toc}{section}{6.5 Prioritätssuche}
+\section{Prioritätssuche}
 \begin{itemize}
     \item Variante der Suche: statt nach einem konstanten Schlüssel suchen wir den
     \begin{itemize}

@@ -1,6 +1,5 @@
 
-\chapter*{9 Hashtabellen}
-\addcontentsline{toc}{chapter}{9 Hashtabellen}
+\chapter{Hashtabellen}
 Suchen in $\bigO{}(1)$ pro Query (d.h. $\bigO{}(N)$ zum Aufbau der Tabelle) \\
 
 Trick wie bei bucket\_sort: i = hash(key)$\Rightarrow$ ganze Zahl $\in [0,M)$ \\
@@ -28,8 +27,7 @@ klassisch (Papierformulare) : hash(key)$\Rightarrow$ key[0:3] erste 3 Buchstaben
 
 perfekte Hashfunktion: hash(key) $\Rightarrow$ [0,11] \hspace*{5mm} [1,12] \\
 
-\section*{9.1 Bewährte Hashfunktionen}
-\addcontentsline{toc}{section}{9.1 Bewährte Hashfunktionen}
+\section{Bewährte Hashfunktionen}
 Idee: Interpretiere jeden Schlüssel als Bytefolge\\
 
 \textbf{Bernstein:}
@@ -72,8 +70,7 @@ def FNV_hash(u):
 \end{minted}
 \includegraphics[width=7cm,height=3cm,keepaspectratio]{./Pictures/abArrays.png}
 
-\section*{9.2 Prinzip der Hashtabelle}
-\addcontentsline{toc}{section}{9.2 Prinzip der Hashtabelle}
+\section{Prinzip der Hashtabelle}
 \begin{itemize}
     \item intern: Array der Länge M (dynamisches Array: vergrößere M falls N zu groß wird $\Rightarrow$ später)
     \item speichere Schlüssel key beim Index i =$\underbrace{\text{ hash(key)}}_{0...(2^{32}-1)} \% \underbrace{M}_{>> \bigO{}(N)} \in [0, M-1]$
@@ -85,8 +82,7 @@ def FNV_hash(u):
     \end{itemize}
 \end{itemize}
 
-\section*{9.3 Hashtabelle mit linearer Verkettung}
-\addcontentsline{toc}{section}{9.3 Hashtabelle mit linearer Verkettung}
+\section{Hashtabelle mit linearer Verkettung}
 \begin{itemize}
     \item wie bei bucket\_sort: für jeden Index hat man ein Array oder eine verkettete List, wo alle Schlüssel mit demselben Hash landen:
     \begin{minted}{python}
@@ -151,8 +147,7 @@ Trick: setze M als Primzahl $\Rightarrow$ keys werden gleichmäßiger verteilt b
 z.B. häufig verwendet für C++ Klasse std::unordered\_map
 \end{itemize}
 
-\section*{9.4 Hashtabellen mit offener Adressierung}
-\addcontentsline{toc}{section}{9.4 Hashtabellen mit offener Adressierung}
+\section{Hashtabellen mit offener Adressierung}
 \begin{itemize}
     \item HT mit linearer Verkettung: pessimistisch $\widehat{=}$ es wird viele Kollisionen geben\\ \hspace*{3cm}$\Rightarrow$ jeder Index enthält von vornherein eine Liste von Keys
     \item HT mit offener Adressierung: optimistisch $\widehat{=}$ Kollisionen sind so selten, dass wir keine Liste für jeden Index brauchen\\ \hspace*{3cm}$\widehat{=}$ jeder Index enthält kein oder ein Element

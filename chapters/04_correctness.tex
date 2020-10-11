@@ -1,6 +1,5 @@
 
-\chapter*{4 Korrektheit}
-\addcontentsline{toc}{chapter}{4 Korrektheit}
+\chapter{Korrektheit}
 
 Ein Algorithmus besteht aus zwei Teilen:
 \begin{itemize}
@@ -25,8 +24,7 @@ Bemerkungen:
     $\Rightarrow$ schwierig zu testen
 \end{enumerate}
 
-\section*{4.1 3 Wege zum korrekten Code}
-\addcontentsline{toc}{section}{4.1 3 Wege zum korrekten Code}
+\section{3 Wege zum korrekten Code}
     \begin{enumerate}
         \item Programmiersprachen finden bestimmte Fehler automatisch:
         \begin{itemize}
@@ -69,8 +67,7 @@ a + b       # -> Python: TypeError
         sehr gute Tests garantieren zwar keine Bugfreiheit, aber können die Wahrscheinlichkeit dafür sehr hoch machen.
     \end{enumerate}
 
-\section*{4.2 Wie testet man in Python?}
-\addcontentsline{toc}{section}{4.2 Wie testet man in Python?}
+\section{Wie testet man in Python?}
 \textbf{Regel:} Tests werden in Testdateien gesammelt und sind \textbf{Teil des Projekts}
 \begin{itemize}[label={$\Rightarrow$}]
     \item werden als \textbf{Regressionstests} nach jeder Programmänderung erneut ausgeführt
@@ -111,8 +108,7 @@ Testframeworks: doctest, unit test (eingebaute Module) \\
 
 \inputminted{python}{Programs/mysqrttest.py}
 
-\subsection*{4.2.1 3 Arten von Tests}
-\addcontentsline{toc}{subsection}{4.2.1 3 Arten von Tests}
+\subsection{3 Arten von Tests}
 \begin{itemize}
     \item black box: die Implementation ist dem Tester unbekannt\\
     $\Rightarrow$ Domainexperten überlegen, welche Systemeigenschaften erfüllt sein müssen
@@ -133,8 +129,7 @@ Testframeworks: doctest, unit test (eingebaute Module) \\
     \end{itemize}
 \end{itemize}
 
-\subsection*{4.2.2 Wie definiert man gute Tests?}
-\addcontentsline{toc}{subsection}{4.2.2 Wie definiert man gute Tests?}
+\subsection{Wie definiert man gute Tests?}
 \begin{itemize}
     \item Prinzip des Regression-Testing: implementierte Tests werden nicht gelöscht, sondern nach jeder Code-Änderung erneut ausgeführt
     \item Prinzip der Reproduktion von Bugs: Bug report $\Rightarrow$ implementiere zuerst einen neuen Test, der Bug reproduziert $\Rightarrow$ danach korrigieren des Codes
@@ -193,8 +188,7 @@ Testframeworks: doctest, unit test (eingebaute Module) \\
         \end{itemize}
     \end{itemize}
 
-    \section*{4.3 Korrektheitsbeweise}
-    \addcontentsline{toc}{section}{4.3 Korrektheitsbeweise}
+    \section{Korrektheitsbeweise}
     \begin{itemize}
         \item auf abstrakter Ebene (Pseudocode): beweise, dass der neue Algorithmus das Ziel erreicht, \\
         $\Rightarrow$ wissenschaftl. Literatur über neue Alg., Lehrbücher, besonders Cormen, et.al.

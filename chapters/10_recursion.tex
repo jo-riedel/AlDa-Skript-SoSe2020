@@ -1,7 +1,6 @@
 
 
-\chapter*{10 Rekursion}
-\addcontentsline{toc}{chapter}{10 Rekursion}
+\chapter{Rekursion}
 \begin{itemize}[label={}]
     \item \hspace*{-1cm} Definition: eine rekursive Funktion ruft sich selbst auf (evtl. indirekt)
     \item \hspace*{-1cm} Eigenschaften:
@@ -132,8 +131,7 @@ n Iterationen $\Rightarrow$ $\bigO{}(n)$\\
 
 \textbf{Variante 6:} (Hausaufgabe) Komplexität $\bigO{}(log N)$ \\
 
-\section*{10.1 Umwandlung von Rekursion in Iteration}
-\addcontentsline{toc}{section}{10.1 Umwandlung Rekursion in Iteration}
+\section{Umwandlung von Rekursion in Iteration}
 \textbf{Beispiel für Umwandlung von Rekursion in Iteration mit Stacks}
 \begin{minted}{python}
 def tree_sort(node, a):     #Aufgabe: geg.Suchbaum, Schluessel in aufsteigender Reihenfolge auslesen und in Array a kopieren
@@ -162,8 +160,7 @@ def traverse_left(node, stack):
 
 Komplexität: $\bigO{}(2^P) = \bigO{}(2^{log N}) = \bigO{}(N)$ falls Baum balanciert \\
 
-\section*{10.2 Komplexitätsberechnung rekursiver Algorithmen}
-\addcontentsline{toc}{section}{10.2 Komplexitätsberechnung rekursiver Algorithmen}
+\section{Komplexitätsberechnung rekursiver Algorithmen}
 \[ T(n) = \underbrace{a_1 * T\left(\frac{N}{b_1}\right)}_{\text{Aufwand für $a_1$ rekursive Teilprobleme der Größe N/$b_1$}} + \cdots + \underbrace{a_n* T\left(\frac{N}{b_n}\right)}_{a_n \text{Teilprobleme der Größe} \frac{N}{b_n}} + \underbrace{f(N)}_{\text{Aufwand der aktuellen Fkt}}\]
 
 fib1(n) : 1 Aufruf(n-1), 1 Aufruf(n-2) $\Rightarrow$ 2 Aufrufe $\bigO{}(N)$ \\
@@ -172,10 +169,9 @@ Ausrechnen durch
 \begin{itemize}
     \item Substitutionsmethode (\glqq händisch\grqq) $\Rightarrow$ später
 \end{itemize}
-    \subsection*{10.2.1 Mastertheorem}
+    \subsection{Mastertheorem}
     \begin{itemize}
     \item \textbf{Mastertheorem} (einsetzen): $T(n) = a* T\left(\frac{N}{b}\right) + f(n)$
-    \addcontentsline{toc}{subsection}{10.2.1 Mastertheorem}
     \begin{itemize}[label={}]
         \item Definiere Rekursionsexponent: $\rho = log_b(a)$
         \item \textbf{Fall 1}: $f(N)$ sehr effizient: $f(N) \in \bigO{}(N^{\rho-\epsilon}), \epsilon > 0$ \\
@@ -194,8 +190,7 @@ Ausrechnen durch
     $\Rightarrow$ Fall 2  \hspace*{1cm} $T(N)\  \in\  \Theta(N^{\rho}\ log\ N)\ =\ \boxed{\Theta(N\ log(N))}$ wie bekannt
 \end{itemize}
 
-    \subsection*{10.2.2 Substitutionsmethode}
-    \addcontentsline{toc}{subsection}{10.2.2 Substitutionsmethode}
+    \subsection{Substitutionsmethode}
     \subsubsection*{Händisches Berechnen mittels Substitutionsmethode}
     \begin{itemize}
         \item \textbf{Beispiel}: Merge Sort, wo wir in zwei ungleich große Teilprobleme aufspalten \\

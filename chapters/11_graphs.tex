@@ -1,8 +1,6 @@
 
-\chapter*{11 Graphen und Graphenalgorithmen}
-\addcontentsline{toc}{chapter}{11 Graphen und Graphenalgorithmen}
-\section*{Einführung}
-\addcontentsline{toc}{section}{11.1 Einführung}
+\chapter{Graphen und Graphenalgorithmen}
+\section{Einführung}
 
 \begin{itemize}
     \item Entstehung des Graphenformalismus: Königsberger Brückenproblem
@@ -30,8 +28,7 @@
     \end{itemize}
 \end{itemize}
 
-\section*{11.2 Definitionen}
-\addcontentsline{toc}{section}{11.2 Definitionen}
+\section{Definitionen}
 \begin{itemize}
     \item \textbf{Arten von Graphen}: ungerichtete und gerichtete
     \begin{itemize}
@@ -101,8 +98,7 @@
             \end{minipage}
         \end{figure}
 
-        \section*{11.3 Planare Graphen, ebene Graphen}
-        \addcontentsline{toc}{section}{11.3 Planare Graphen, ebene Graphen}
+        \section{Planare Graphen, ebene Graphen}
         \begin{itemize}
         \item planar: Graph kann ohne Überkreuzungen in der Ebene gezeichnet werden
         \item eben: wenn tatsächlich so gezeichnet\\
@@ -138,9 +134,7 @@
     \end{itemize}
     \end{itemize}
 
-    \section*{11.4 Repräsentation von Graphen}
-    \addcontentsline{toc}{section}{11.4 Repräsentation von Graphen}
-    \addcontentsline{toc}{subsection}{xx Graphendatenstrukturen, Adjazenzlisten, Adjazenzmatrizen}
+    \section[Graphendatenstrukturen, Adjazenzlisten, Adjazenzmatrizen]{Repräsentation von Graphen}
 
     \subsection*{Adjazenzmatrix}
      $ A\  (\ |v|\ \times \ |v|\ )\ :\  a_{i,j} = \begin{cases} 1 & \text{wenn} (u_i, u_j) \in E \\
@@ -213,8 +207,7 @@ def transpose_graph(graph):
         \end{minted}
     \end{itemize}
 
-    \section*{11.5 Iterieren durch Graphen}
-    \addcontentsline{toc}{section}{11.5 Iterieren durch Graphen}
+    \section{Iterieren durch Graphen}
     \subsection*{Traversieren von Graphen}
     \begin{itemize}
         \item alle Knoten in einer sinnvollen Reihenfolge (genau einmal) besuchen
@@ -373,7 +366,6 @@ bfs(graph, 0)
 
 \newpage
     \subsection*{Anwendungen von Tiefensuche – Damenproblem (beim Schach)}
-    \addcontentsline{toc}{subsection}{Damenproblem}
     \textbf{Aufgabe}: Platziere N Damen so auf einem NxN Schachbrett, dass sie sich nicht gegenseitig schlagen\\
 
     \textbf{Bsp}.: N = 4 \hspace*{1cm}(echte Schachbretter: N = 8)\\ \includegraphics[width=2.5cm,height=2.5cm,keepaspectratio]{./Pictures/Damenbrett.png}\\
@@ -392,7 +384,6 @@ bfs(graph, 0)
     \end{itemize}
 
     \subsection*{Anwendungen der Tiefensuche – Zusammenhangskomponenten}
-    \addcontentsline{toc}{subsection}{Zusammenhangskomponenten}
     \begin{itemize}
         \item Bestimmen von Zusammenhangskomponenten: in unzusammenhängendem ungerichtetem Graph:
 
@@ -615,8 +606,7 @@ def shortest_path(graph, start, target):
         \end{minipage}
     \end{figure}
 
-    \section*{11.6 Gewichtete Graphen}
-    \addcontentsline{toc}{section}{11.6 Gewichtete Graphen}
+    \section{Gewichtete Graphen}
         \begin{itemize}
         \item Knotengewichteter Graph: jedem Knoten ist eine Zahl (reell oder ganz) zugeordnet
         \item Kantengewichteter Graph: jeder Kante ist eine Zahl (reell oder ganz) zugeordnet \\
@@ -964,8 +954,7 @@ def kruskal(graph, weights):
     \end{figure}
 
 
-    \section*{11.7 Algorithmen für gerichtete Graphen}
-    \addcontentsline{toc}{section}{11.7 Algorithmen für gerichtete Graphen}
+    \section{Algorithmen für gerichtete Graphen}
 
     Anwendungen gerichteter Graphen:
     \begin{itemize}

@@ -1,6 +1,5 @@
 
-    \chapter*{5 Effizienz}
-    \addcontentsline{toc}{chapter}{5 Effizienz}
+    \chapter{Effizienz}
 
     \begin{itemize}
         \item eine der zentralen Fragen bei Algorithmen
@@ -8,8 +7,7 @@
         \item Komplexität (auf abstrakt algorithmischer Ebene): für Programmierer \& Theoretiker
     \end{itemize}
 
-    \section*{5.1 Laufzeit}
-    \addcontentsline{toc}{section}{5.1 Laufzeit}
+    \section{Laufzeit}
     \glqq der Algorithmus kommt $\underline{\text{rechtzeitig}}$ zum Ergebnis\grqq
     \begin{itemize}
         \item bei Steuerprogrammen (Maschinen, Fahrzeuge, Flugzeuge):
@@ -92,8 +90,7 @@
         \item unnötige Typkonvertierungen vermeiden: int $\Leftrightarrow$ double
     \end{itemize}
 
-\section*{5.2 Komplexität}
-\addcontentsline{toc}{section}{5.2 Komplexität}
+\section{Komplexität}
 \begin{itemize}
     \item beschreibt den Aufwand eines Algorithmus auf abstrakter Ebene
     \item macht Algorithmen vergleichbar, unabhängig von Implementation und Hardware
@@ -131,8 +128,7 @@ mehrere $\mathcal O$'s verschwinden: $ \mathcal O( \mathcal O(f(N)) \in \mathcal
 Spezialfall von Polynom: additive Konstanten dominieren nie \\
 \hspace*{1cm}$\Rightarrow$ können weggelassen werden: $\mathcal O(f(N)) + p \in \mathcal O(f(N))$
 
-\section*{5.3 Landau-Symbole, O-Notation}
-\addcontentsline{toc}{section}{5.3 Landau-Symbole, O-Notation}
+\section{Landau-Symbole, O-Notation}
 \begin{itemize}[label={}]
     \item groß-$\bigO{}$: \hspace*{5mm}$f(N)$ \glqq $\leq$\grqq $g(N)$ : $\exists N_0, c, $ so dass $\forall N \geq N_0$ gilt : $f(N) \leq c * g(N)$\\
     \hspace*{4.5cm}$\Leftrightarrow f(N) \in O(g(N))$
@@ -211,8 +207,7 @@ Regel von l'Hospital: $\lim\limits_{x \rightarrow x_0} \frac{f(x)}{g(x)} = \lim\
 \[\lim_{N \rightarrow \infty} \frac{ln N}{N} = \lim_{N \rightarrow \infty} \frac{\frac{1}{N}}{1} = \lim_{N \rightarrow \infty} \frac{1}{N} =  \frac{''1''}{\infty} = 0  \]
 \[ \Rightarrow ln N \in o(N) \]
 
-\section*{5.4 Analyse von Algorithmen für den gleitenden Mittelwert}
-\addcontentsline{toc}{section}{5.4 Analyse von Algorithmen für den gleitenden Mittelwert}
+\section{Analyse von Algorithmen für den gleitenden Mittelwert}
 \begin{minted}{python}
 def running_mean(a, k):             #N=len(a)
     r = [0] * len(a)                #O(N)
@@ -258,8 +253,7 @@ Rechenregel: $a_0 + a_1 * N + a_2 * N^2 + \cdots + a_k * N^k \in \bigO{}(N^k)$ \
     \hspace*{3cm} $\bigO{}(N-k) = \bigO{}(N)$
 
 
-\section*{5.5 Amortisierte Komplexität}
-\addcontentsline{toc}{section}{5.5 Amortisierte Komplexität}
+\section{Amortisierte Komplexität}
 \begin{itemize}
     \item falls dieselbe Operation manchmal schnell und manchmal langsam ist:
     \begin{itemize}

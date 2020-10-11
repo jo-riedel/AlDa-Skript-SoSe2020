@@ -1,6 +1,5 @@
 
-\chapter*{8 Effizientes Sortieren und Suchen}
-\addcontentsline{toc}{chapter}{8 Effizientes Sortieren und Suchen}
+\chapter{Effizientes Sortieren und Suchen}
 in $\bigO{}(N)$ (Sortieren) bzw. $\bigO{}(1)$ (Suchen) \\
 \begin{itemize}[label={}]
     \item \textbf{Beweis} wenn man nur die Operation \verb|key1 < key2| (Ordnung) zur Verfügung hat, ist Sortieren nicht besser als $\Omega (NlogN)$ möglich
@@ -28,8 +27,7 @@ Wie groß ist der Fragebaum mindestens, wenn wir die Frage so geschickt wie mög
     \item $\Rightarrow$ Merge Sort, Quick Sort, Heap Sort sind nicht zu verbessern, ohne zusätzliche Anforderungen in die Schlüssel
 \end{itemize}
 
-\section*{8.1 Sortieren in linearer Zeit $\bigO{}$(N)}
-\addcontentsline{toc}{section}{8.1 Sortieren in linearer Zeit}
+\section{Sortieren in linearer Zeit $\bigO{}$(N)}
 \begin{itemize}
     \item ist einfach, wenn die Schlüssel ganze Zahlen im Bereich $[0, \cdots, M-1]$ \\
     so dass $M \in \bigO{}(N)$ $\Rightarrow$ benutze Array($\infty$) von Arrays $\rightarrow$ ein Array pro Schlüssel (genauer: Queue)
@@ -66,8 +64,7 @@ $\Rightarrow$ der gesamte Algorithmus ist $\bigO{}(N)$, falls $M \in \bigO{}(N)$
 wenn eine solche Funktion für keys definiert ist $\Rightarrow$ bucket sort $\in \bigO{}(N)$
 \end{itemize}
 
-\section*{8.2 Bucket Sort}
-\addcontentsline{toc}{section}{8.2 Bucket Sort}
+\section{Bucket Sort}
 
 \begin{minted}{python}
 def bucket_sort(a, quantize, d):
