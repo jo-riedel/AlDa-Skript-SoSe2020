@@ -1,0 +1,188 @@
+\chapter*{2 Container}
+\addcontentsline{toc}{chapter}{2 Container}
+\begin{itemize}[label={-}]
+    \item Datenstrukturen, die andere Datenstrukturen enthalten
+    \item wichtig, weil Computer benutzt werden, wenn man dieselbe Operation sehr $\underline{\text{häufig}}$ ausführen will
+\end{itemize}
+$\underline{\text{Beispiele:}}$
+\begin{itemize}[label={-}]
+    \item RGB Pixel: 3 Helligkeitswerte für Rot, Grün, Blau
+    \item Bild: Container von RGB Pixeln (1024x1024)
+    \item Video: Folge von Bildern (20 fps)
+\end{itemize}
+Grundprinzip: DS können geschachtelt werden, um mächtigere DS zu erzeugen
+
+
+
+\section*{2.1 Abstrakte Container – Datentypen}
+\addcontentsline{toc}{section}{2.1 Abstrakte Container – Datentypen}
+
+Interpretation \& Operation (Bit-Repräsentation ist dem Programmierer überlassen) \\
+
+Notation: Operationen werden durch Vor- und Nachbedingung spezifiziert, dabei ist \verb|x| die DS vor der Operation, \verb|x'| nach der Operation \\
+
+\subsection*{3 Arten von Operationen: }
+\begin{itemize}[label={-}]
+    \item Konstruktoren: erzeugen eine neue DS mit definiertem Anfangszustand
+    \item Accessoren: aktuellen Zustand (=Inhalt des Containers) abfragen
+    \item Modifizierer: aktuellen Zustand ändern
+\end{itemize}
+
+
+\section*{2.2 Grundlegende Container}
+\addcontentsline{toc}{section}{2.2 Grundlegende Container}
+
+    \subsection*{2.2.1 Array}
+    \addcontentsline{toc}{subsection}{2.2.1 Array}
+    speichert Objekte im Speicher hintereinander ab \\
+
+    \begin{tabular}{| C{1cm} | C{1cm} | C{1cm} | C{1cm} |C{1cm} | C{1cm}| C{1cm} |C{1cm}| C{1cm}| C{1cm}| }
+        \hline
+        Ob1 & Ob2 & Ob3 & ... & & & & & & ObN \\ \hline
+    \end{tabular} \\
+
+    Zugriff auf Objekte erfolgt über den Index $\widehat{=}$ laufende Nummer Position im Array \\
+
+    Denkschulen:
+    \begin{itemize}
+        \item zero-band indexing (C, C++, Python) \\
+        \fbox{0-based: 0, 1, ..., N-1 (N = Arraygröße)}
+        \item one-based indexing (Fortran, Matlab, Julia)\\
+        1-based: 1, 2, ..., N
+    \end{itemize}
+
+    ADT: \\
+    \begin{tabular}{C{5cm} C{5cm} C{5cm}}
+        Op & Bedeutung & Axiom \\ \hline
+        \verb| a = new_array(size, initial)| & Konstruktor & \verb|len(a) == size| \\
+        & & $\forall i \in [0, size - 1]$: \\
+        & & \verb|get(a,i) == initial| \\ \hline
+        \verb|v=get(a,i)| & Zugriff auf Element i & Vorbedingung: $i \in [0, size-1]$ \\
+        & & Nachbedingung: \verb| v ==| i-tes El. \\
+        & & \verb|a' == a| \\ \hline
+        \verb|set(a, i, v)| & Setzen des i-ten Elements & Vorbed: $ i \in [0, size-1]$ \\
+        & & Nachbed.: \verb|get(a',i) == v| \\
+        & & $\forall k \neq i:$ \verb|get(a',k) == get(a,k)| \\
+    \end{tabular}
+
+    in Python:
+    \begin{itemize}[label={}]
+        \item get $\Rightarrow$ \verb|__getitem__|
+        \item set $\Rightarrow$ \verb|__setitem__|
+        \item[$\bullet$] Punktsyntax: \verb|get(a,i)| $\Rightarrow$ \verb|a.__getitem__(i)| \\
+        ``\_\_getitem\_\_'' ist Methode der Klasse
+        \item[$\bullet$] Index-Notation \\
+        \verb|get(a,i)| $\Rightarrow$ \verb|v = a[i]| (falls auf der rechten Seite der Zuweisung) \\
+        \verb|set(a,i,v)| $\Rightarrow$ \verb|a[i] = v|
+        \item[$\bullet$] Konstruktor: \verb|new_array| $\Rightarrow$ list \\
+        ($\underline{\text{nicht}}$ mit verketteter Liste $\underline{\text{verwechseln}}$)
+    \end{itemize}
+
+    \subsection*{2.2.2 Stack}
+    \addcontentsline{toc}{subsection}{2.2.2 Stack}
+    $\widehat{=}$ Stapel (z.B. von Bierkästen) \\
+    nur der oberste Kasten ist leicht zugreifbar \\
+
+    \begin{tabular}{C{5cm} C{5cm} C{5cm}}
+        Op & Bedeutung & Axiome \\ \hline
+        \verb|s = new_stack()| & Konstruktor & \verb|len(s) == 0| \\
+        \verb|len(s)| & Abfrage der Größe & (= aktuelle Anzahl der Elemente) \\
+        \verb|push(s,v)| & Element v am Ende anhängen (oben drauf stapeln) & $\begin{cases}
+        \verb|len(s') == len(s) + 1| \\
+        \verb|top(s') == v|
+        \end{cases}$ \\
+        \verb|top(s)| & Abfragen des obersten Elements & \\
+        \verb|pop(s)| & Entfernen des obersten/letzten Elements & $\begin{cases}
+        \verb|s'= pop(s, push(s,v))| \\
+        \verb|s' == s| \end{cases}$ \\
+    \end{tabular} \\
+
+    in Python: die DS ``list'' ist auch ein Stack
+    \begin{itemize}
+        \item \verb|push(s,v)| $\Rightarrow$ \verb|s.append(v)|
+        \item \verb|pop(s)| $\Rightarrow$ \verb|s.pop()|
+        \item \verb|top(s)| $\Rightarrow$ \verb|s[-1]|
+    \end{itemize}
+    Konventionen in Python: negative Indizes vom Ende gerechnet
+    \begin{itemize}[label={}]
+        \item \verb|s[i]| (i positiv): normaler Zugriff
+        \item \verb|s[i]| (i negativ): \verb|s[len(s)+i]|
+        \item \verb|s[-1]    s[len(s)-1]|
+    \end{itemize}
+
+    Stackverhalten: LIFO ``last in – first out''
+
+    \subsection*{2.2.3 Queue}
+    \addcontentsline{toc}{subsection}{2.2.3 Queue}
+    $\widehat{=}$ Warteschlange (z.B. Eisdiele) \\
+
+    FIFO ``first in – first out'' \\
+    ``first come - first serve'' \\
+
+    \begin{tabular}{C{5cm} C{5cm} C{5cm}}
+        Op & Bedeutung & Axiome \\ \hline
+        \verb|push(q,v)| & v am Ende anhängen (wie beim Stack) & \\
+        \verb|first(q)| & das erste Element (gegensatz Stack: \verb|top(s)| $\Rightarrow$ letztes Element) & \\
+        \verb|pop(q)| & entferne das $\underline{\text{erste}}$ Element (geg. Stack: das letzte El.) & \\ \hline
+    \end{tabular}
+
+    in Python:
+    $\begin{rcases}
+        \verb|first(q)| \Rightarrow \verb|q[0]| \\
+        \verb|pop[q]| \Rightarrow \verb|q.pop(0)|
+        \end{rcases}$
+        Funktion von ``list'' \\
+
+        \subsection*{2.2.4 Deque}
+        \addcontentsline{toc}{subsection}{2.2.4 Deque}
+        $\widehat{=}$ double ended Queue $\widehat{=}$ DS gleichzeitig Stack und Queue \\
+
+        \verb|pop_front()| $\widehat{=}$ erstes Element entfernen $\widehat{=}$ Queue \\
+        \verb|pop_back()| $\widehat{=}$ letztes Element entfernen $\widehat{=}$ Stack \\
+
+        \subsection*{2.2.5 Assoziatives Array}
+        \addcontentsline{toc}{subsection}{2.2.5 Assoziatives Array}
+        $\widehat{=}$ Dictionary $\widehat{=}$ in Python ``dict'' \\
+
+        statt Indizes aus $\mathbb{N}_{0}$ (natürliche Zahlen) sind $\underline{\text{beliebige}}$ Schlüssel erlaubt. \\
+
+        typische Fälle:
+        \begin{itemize}[label={-}]
+            \item natürliche Zahlen, die nicht in \verb|[0, N-1]| liegen \\
+            z.B. Matrikelnummern \\
+            \verb|a[1359742]| $\Rightarrow$ ``Fritz Schulze''
+            \item strings, z.B. Namen \\
+            \verb|alda_noten["Fritz Schulze"]| $\Rightarrow$ 1.0
+        \end{itemize}
+        die Schlüsselworte werden automatisch (versteckt vor Programmierer) in die eigentlichen Speicherindizes umgerechnet \\
+
+        \subsection*{2.2.6 Ausblick: Prioritätswartescchlangen}
+        \addcontentsline{toc}{subsection}{2.2.6 Prioritätswarteschlangen}
+        \verb|a.top(), a.pop()| greifen zu / entfernen das Element mit $\underline{\text{höchster Priorität}}$\\
+
+        Stack und Queue sind Spezialfälle: \\
+        neuestes bzw. ältestes Element haben höchste Priorität \\
+
+
+        \subsection*{Anwendungen von Queue und Stack}
+        \begin{itemize}
+            \item Queue: Drucken-Warteschlange
+            \item Stack:Undo-Funktionalität in Textprogrammen
+        \end{itemize}
+
+        \begin{tabular}{C{5cm} | C{5cm} | C{5cm}}
+            Aktion des Benutzers & undo-stack u & redo-Stack v \\ \hline
+            $a_1$ & \verb|u.push(a1)| & \\
+            $a_2$ & \verb|u.push(a2)| & \\
+            $a_3$ & \verb|u.push(a3)| & \\ \hline
+            undo & \verb|undo(u.top())| $\Rightarrow a_3$ rückgängig & \\
+            & \verb|u.pop()| & \verb|v.push(u.top())|\\ \hline
+            undo & \verb|undo(u.top())| $\Rightarrow a_2$ rückgängig & \\
+            & \verb|u.pop()| & \verb|v.push(u.top())|\\ \hline
+            redo & & \verb|do (v.top())| $\Rightarrow$ $a_2$ wiederherstellen \\
+            & \verb|u.push(v.top())| & \verb|v.pop()| \\ \hline
+            $a_4$ & \verb|u.push(a4)| & \verb|v.clear()| \\
+            $\vdots$ & $\vdots$ & $\vdots$ \\
+        \end{tabular}
+
+
