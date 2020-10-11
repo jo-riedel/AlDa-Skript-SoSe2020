@@ -1,5 +1,4 @@
-\chapter*{2 Container}
-\addcontentsline{toc}{chapter}{2 Container}
+\chapter{Container}
 \begin{itemize}[label={-}]
     \item Datenstrukturen, die andere Datenstrukturen enthalten
     \item wichtig, weil Computer benutzt werden, wenn man dieselbe Operation sehr $\underline{\text{häufig}}$ ausführen will
@@ -14,8 +13,7 @@ Grundprinzip: DS können geschachtelt werden, um mächtigere DS zu erzeugen
 
 
 
-\section*{2.1 Abstrakte Container – Datentypen}
-\addcontentsline{toc}{section}{2.1 Abstrakte Container – Datentypen}
+\section{Abstrakte Container – Datentypen}
 
 Interpretation \& Operation (Bit-Repräsentation ist dem Programmierer überlassen) \\
 
@@ -29,11 +27,9 @@ Notation: Operationen werden durch Vor- und Nachbedingung spezifiziert, dabei is
 \end{itemize}
 
 
-\section*{2.2 Grundlegende Container}
-\addcontentsline{toc}{section}{2.2 Grundlegende Container}
+\section{Grundlegende Container}
 
-    \subsection*{2.2.1 Array}
-    \addcontentsline{toc}{subsection}{2.2.1 Array}
+    \subsection{Array}
     speichert Objekte im Speicher hintereinander ab \\
 
     \begin{tabular}{| C{1cm} | C{1cm} | C{1cm} | C{1cm} |C{1cm} | C{1cm}| C{1cm} |C{1cm}| C{1cm}| C{1cm}| }
@@ -78,8 +74,7 @@ Notation: Operationen werden durch Vor- und Nachbedingung spezifiziert, dabei is
         ($\underline{\text{nicht}}$ mit verketteter Liste $\underline{\text{verwechseln}}$)
     \end{itemize}
 
-    \subsection*{2.2.2 Stack}
-    \addcontentsline{toc}{subsection}{2.2.2 Stack}
+    \subsection{Stack}
     $\widehat{=}$ Stapel (z.B. von Bierkästen) \\
     nur der oberste Kasten ist leicht zugreifbar \\
 
@@ -112,8 +107,7 @@ Notation: Operationen werden durch Vor- und Nachbedingung spezifiziert, dabei is
 
     Stackverhalten: LIFO ``last in – first out''
 
-    \subsection*{2.2.3 Queue}
-    \addcontentsline{toc}{subsection}{2.2.3 Queue}
+    \subsection{Queue}
     $\widehat{=}$ Warteschlange (z.B. Eisdiele) \\
 
     FIFO ``first in – first out'' \\
@@ -133,15 +127,13 @@ Notation: Operationen werden durch Vor- und Nachbedingung spezifiziert, dabei is
         \end{rcases}$
         Funktion von ``list'' \\
 
-        \subsection*{2.2.4 Deque}
-        \addcontentsline{toc}{subsection}{2.2.4 Deque}
+        \subsection{Deque}
         $\widehat{=}$ double ended Queue $\widehat{=}$ DS gleichzeitig Stack und Queue \\
 
         \verb|pop_front()| $\widehat{=}$ erstes Element entfernen $\widehat{=}$ Queue \\
         \verb|pop_back()| $\widehat{=}$ letztes Element entfernen $\widehat{=}$ Stack \\
 
-        \subsection*{2.2.5 Assoziatives Array}
-        \addcontentsline{toc}{subsection}{2.2.5 Assoziatives Array}
+        \subsection{Assoziatives Array}
         $\widehat{=}$ Dictionary $\widehat{=}$ in Python ``dict'' \\
 
         statt Indizes aus $\mathbb{N}_{0}$ (natürliche Zahlen) sind $\underline{\text{beliebige}}$ Schlüssel erlaubt. \\
@@ -156,8 +148,7 @@ Notation: Operationen werden durch Vor- und Nachbedingung spezifiziert, dabei is
         \end{itemize}
         die Schlüsselworte werden automatisch (versteckt vor Programmierer) in die eigentlichen Speicherindizes umgerechnet \\
 
-        \subsection*{2.2.6 Ausblick: Prioritätswartescchlangen}
-        \addcontentsline{toc}{subsection}{2.2.6 Prioritätswarteschlangen}
+        \subsection[Prioritätswartescchlangen]{Ausblick: Prioritätswartescchlangen}
         \verb|a.top(), a.pop()| greifen zu / entfernen das Element mit $\underline{\text{höchster Priorität}}$\\
 
         Stack und Queue sind Spezialfälle: \\
