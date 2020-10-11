@@ -1,7 +1,5 @@
 
-        \chapter*{3 Sortieren}
-        \addcontentsline{toc}{chapter}{3 Sortieren}
-
+        \chapter{Sortieren}
         Warum?
         \begin{itemize}
             \item viele Konzepte des Algorithmen-Design und -Vergleichs werden sehr anschaulich
@@ -49,8 +47,7 @@
 
             Hausaufgabe: Wie bekommt man $>, \geq, ==, !=$ \\
 
-            \section*{3.1 Selection Sort}
-            \addcontentsline{toc}{section}{3.1 Selection Sort}
+            \section{Selection Sort}
 
             \begin{minted}{python}
 def selection_sort(a):
@@ -79,8 +76,7 @@ def selection_sort(a):
             \end{itemize}
             $\Rightarrow$ Selection Sort nicht stabil \\
 
-            \section*{3.2 Insertion Sort}
-            \addcontentsline{toc}{section}{3.2 Insertion Sort}
+            \section{Insertion Sort}
             ähnlich einfach wie Selection Sort, aber \emph{stabil}
             \begin{itemize}
                 \item Beobachtung: Insertion Sort ist für \emph{kleine Arrays} (N $<$ 30) der schnellste Sortieralgorithmus \\
@@ -132,8 +128,7 @@ def insertion_sort(a):
 
     \end{itemize}
 
-    \subsection*{3.2.2 Aufwand beim Sortieren}
-    \addcontentsline{toc}{subsection}{3.2.2 Aufwand beim Sortieren}
+    \subsection{Aufwand beim Sortieren}
     Aufwand beim Sortieren: Anzahl der Vergleiche $a[i] < a[k]$ und/oder Anzahl der Vertauschungen $a[i],a[k] = a[k], a[i]$
 
     \begin{itemize}
@@ -187,8 +182,7 @@ def insertion_sort_1(a):
 
     \end{itemize}
 
-    \section*{3.3 Merge Sort}
-    \addcontentsline{toc}{section}{3.3 Merge Sort}
+    \section{Merge Sort}
 
     \begin{itemize}
         \item Operation merge: Setze ein großes Array aus zwei sortierten Teilarrays zusammengesetzt
@@ -315,8 +309,7 @@ def merge_sort(a):
             $\underline{\text{aber}}$: hochoptimiert, d.h. häufige Spezialfälle (bereits sortiert, umgekehrt sortiert) werden abgefangen und schneller implementiert
         \end{itemize}
 
-    \section*{3.4 Quick Sort}
-    \addcontentsline{toc}{section}{3.4 Quick Sort}
+    \section{Quick Sort}
 
     \begin{itemize}
         \item Standard-Algorithmus für Sortieren, z.B. in vielen Implementationen von C++:  std::sort() \\
