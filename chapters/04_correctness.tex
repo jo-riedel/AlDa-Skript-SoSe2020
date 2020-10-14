@@ -1,0 +1,253 @@
+
+\chapter{Korrektheit}
+
+Ein Algorithmus besteht aus zwei Teilen:
+\begin{itemize}
+    \item Spezifikation: $\underline{\text{Was}}$ soll der Algorithmus tun? (Vor- und Nachbedingungen)
+    \item Implementation: $\underline{\text{Wie}}$ geht der Algorithmus vor?
+\end{itemize}
+$\Rightarrow$ Validierung: Prüfe, ob die Spezifikation das beschreibt, was wir wirklich wollen. \\
+$\Rightarrow$ Verifikation: Prüfe, ob die Implementation die Spezifikation erfüllt. \\
+
+Bemerkungen:
+\begin{enumerate}
+    \item Wenn ein Algorithmus nicht korrekt ist, sind alle anderen Qualitäten (Effizienz, Lesbarkeit, ...) irrelevant.
+    \item Manche Algorithmen liefern nie oder fast nie exakte Ergebnisse, z.B. Numerik:
+    \begin{itemize}
+        \item Mathematik: reelle Zahlen (unendlich viele Bits)
+        \item Informatik: Gleitkommazahlen (endlich viele Bits)
+    \end{itemize}
+    $\Rightarrow$ dann muss die Spezifikation die gewünschte Genauigkeit angeben. \\
+    bei float64 typisch: relativer Fehler zw. $10^{-10} \dots 10^{-15}$
+    \item Manche Alg. liefern nie zweimal das gleiche Ergebnis (z.B. Training neuronaler Netze) oder nur mit sehr hoher Wahrscheinlichkeit das richtige Ergebnis (randomisierte Primzahltests)\\
+    $\rightarrow$ typisch für Alg., die Zufallszahlen verwenden \\
+    $\Rightarrow$ schwierig zu testen
+\end{enumerate}
+
+\section{3 Wege zum korrekten Code}
+    \begin{enumerate}
+        \item Programmiersprachen finden bestimmte Fehler automatisch:
+        \begin{itemize}
+            \item Syntaxprüfung:
+            \begin{minted}{python}
+if a = 2:   # sollte ein "==" sein
+    a += 1  # -> Python: Syntax Error
+            \end{minted}
+            in C: es ist erlaubt, aber es gibt eine Warnung
+            \item Typprüfung: jede Datenstruktur in der Programmiersprache hat einen Typ \\
+            $\Rightarrow$ Programmiersprache weist Operation zurück, wenn die Typen nicht passen
+            \begin{minted}{python}
+a = 3
+b = None
+a + b       # -> Python: TypeError
+            \end{minted}
+            \begin{itemize}
+                \item in C/C++: statische Typprüfung: der Fehler wird bereits bei der Kompilierung signalisiert
+                \item Python: dynamische Typprüfung: Der Fehler wird erst bei der Ausführung signalisiert
+            \end{itemize}
+            \item Prüfen der Vorbedingung:
+            \begin{itemize}
+                \item in manchen Programmiersprachen (z.B. Eiffel) kann man Vorbedingungen für jede Funktion explizit formulieren $\Rightarrow$ sie werden bei jedem Aufruf automatisch geprüft
+                \item in Python: händisch prüfen (mit \verb|if(Vorbedingung == False): |\\ \verb|raise exception(``Message'')|)\\
+                (ähnlich in den meisten anderen Sprachen)
+            \end{itemize}
+        \end{itemize}
+        \item formaler Korrektheitsbeweis \\
+        $\Rightarrow$ Bugs werden mathematisch ausgeschlossen \\
+        $\Rightarrow$ sehr aufwändig, nur bei sicherheitskritischer Software
+        \item Software-Tests: heute die wichtigste Methode \\
+        \begin{tabular}{C{2cm} | C{4cm} L{5cm}}
+            Alg. & Test & \\ \hline
+            korrekt & korrekt & $\Rightarrow$ alles okay\\
+            bug & korrekt & $\Rightarrow$ ok: Test findet das Bug\\
+            korrekt & bug & $\Rightarrow$ ärgerlich, aber leicht zu reparieren\\
+            bug & bug/nicht mächtig genug & $\Rightarrow$ Test versagt \\
+        \end{tabular}\\
+
+        sehr gute Tests garantieren zwar keine Bugfreiheit, aber können die Wahrscheinlichkeit dafür sehr hoch machen.
+    \end{enumerate}
+
+\section{Wie testet man in Python?}
+\textbf{Regel:} Tests werden in Testdateien gesammelt und sind \textbf{Teil des Projekts}
+\begin{itemize}[label={$\Rightarrow$}]
+    \item werden als \textbf{Regressionstests} nach jeder Programmänderung erneut ausgeführt
+    \item dadurch erkennt man sofort, wenn eine Änderung etwas zerstört
+\end{itemize}
+
+Testframeworks: doctest, unit test (eingebaute Module) \\
+\hspace*{2,85cm} pytest, nose (muss man installieren)\\
+\hspace*{0,5cm} unterstützen das systematische Schreiben und Ausführen von Tests \\
+\textbf{Beispiel: }$x=\sqrt{y}$ \hspace*{5mm}berechne Wurzel
+\begin{itemize}
+    \item Prinzip: iterativer Algorithmus
+    \begin{enumerate}
+        \setcounter{enumi}{-1}
+        \item initial guess $x^{(o)}$, so dass $(x^{(o)})^{2} \approx y$
+        \item while maximum number of iteration must not reached:
+        \begin{enumerate}[label=\alph*)]
+            \item compute new guess from old one \\
+            $x^{(t)} = f(x^{(t-1)},y)$
+            \item if $x^{(t)}$ is good enough: \\
+            return $x^{(t)}$
+        \end{enumerate}
+        return $x^{(\text{T}_{max})}$ and/or error message warning
+    \end{enumerate}
+    \item Babylonischer Alg:
+     \[ x^{(t)} = \frac{x^{(t-1)}+y/x^{(t-1)}}{2} \]
+     Begründung: Spezialfall von Newtons Algorithmus zur Berechnung von Nullstellen
+     \begin{itemize}[label={}]
+        \item Aufgabe: \hspace*{5mm}finde $x$, so dass $g(x) = 0$
+        \item Speziell:  \hspace*{6mm}$g(x) = y - x^2 = 0$ falls $x = \sqrt{y}$
+        \item Iteration:
+        \[ x^{(t)} = x^{(t-1)} - \frac{g(x^{(t-1)})}{g'(x^{(t-1)})}\]
+        \[ \biggl\lbrack g'(x) = -2x \biggr\rbrack = x^{(t-1)} - \frac{y-{(x^{(t-1)})}^2}{-2x^{(t-1)}}\]
+        \[ \hspace*{2cm} = \frac{x^{(t-1)} + y/x^{(t-1)}}{2}\]
+     \end{itemize}
+\end{itemize}
+\footnote{Ducktyping: Objekt wird nicht aufgrund des Datentyps sondern aufgrund der möglichen auf ihm anwendbaren Operationen behandelt}
+
+\inputminted{python}{Programs/mysqrttest.py}
+
+\subsection{3 Arten von Tests}
+\begin{itemize}
+    \item black box: die Implementation ist dem Tester unbekannt\\
+    $\Rightarrow$ Domainexperten überlegen, welche Systemeigenschaften erfüllt sein müssen
+    \item gray box: der Tester kennt die Implementation und kann den Test geziehlt auswählen, z.B. Randworttest
+    \item white box: der Tester kann die Implementation modifizieren
+    \begin{itemize}
+        \item explizite Tests für Nachbedingungen einfügen \\
+        $\Rightarrow$ diese Tests werden in der Releaseversion deaktiviert \\
+        z.B. assert(test):
+        \begin{itemize}
+            \item in Debugcode: führe den Test aus
+            \item in Releasecode: ignoriere Test
+        \end{itemize}
+        einige Tests bleiben im Releasecode $\Rightarrow$ Entwickler über Abstürze informieren
+        \item Code coverage messen: automatisch überprüfen, welche Teile des Quellcodes während des Tests ausgeführt werden : $> 80\% $, möglichst $100\%$
+        \item absichtliche Bugs einbauen: teste die Mächtigkeit der Tests\\
+        $\Rightarrow$ Testprogramm verbessern ``fault injection''
+    \end{itemize}
+\end{itemize}
+
+\subsection{Wie definiert man gute Tests?}
+\begin{itemize}
+    \item Prinzip des Regression-Testing: implementierte Tests werden nicht gelöscht, sondern nach jeder Code-Änderung erneut ausgeführt
+    \item Prinzip der Reproduktion von Bugs: Bug report $\Rightarrow$ implementiere zuerst einen neuen Test, der Bug reproduziert $\Rightarrow$ danach korrigieren des Codes
+    \item Prinzip der äquivalenten Eingaben: meist gilt: für ähnliche Eingaben verhält sich der Algorithmus gleich (d.h. die gleichen Codeteile, z.B. if-Zweige, for-Iterationen, while-Iterationen, Unterprogrammaufrufe werden ausgeführt)
+    \begin{itemize}[label={$\Rightarrow$}]
+        \item teste wenige repräsentative Eingaben einer Äquivalenzklasse
+        \item teste Repräsentanten von $\underline{\text{allen}}$ Aquivalenzklassen $\Rightarrow$ Code Coverage
+        \item[] $\lbrack$ für einfache, aber kritische Codeteile: vollständiger Test aller Eingaben$\rbrack$
+    \end{itemize}
+    \item Prinzip des Randwerttests: Eingaben an der Grenze der Äquivalenzklassen haben besonders häufig Bugs $\Rightarrow$ teste diese besonders sorgfältig \\
+    \textbf{Bsp:} \verb|mysqrt(): |
+    \begin{itemize}
+        \item Äquivalenzklassen:
+        \begin{itemize}
+            \item $y < 0$
+            \item $0 \leq y < 1$
+            \item $1 \leq y$
+            \item $y \in \text{int} \cap x \in \text{int}, y \in \text{int} \cap x \in \text{real}, y \in \text{real}\cap x \in \text{real}$
+            \end{itemize}
+            \item Randwerte: y = 0, y = 1
+            \end{itemize}
+            \item Prinzip der \glqq beliebten Fehler\grqq:
+            \begin{itemize}
+            \item off-by-one: eine Variable (oft: Schleifen- oder Arrayindex) liegt um 1 daneben: z.B.
+            \begin{itemize}
+            \item falscher Vergleich: if $i<k$: statt if $i <= k$:
+            \item falsche Indizes: a[i] $<$ a[i+1] statt a[i-1] $<$ a[i]
+            \end{itemize}
+            \item Rundungsfehler bei Gleitkommazahlen: ($sin(\pi)\not{=} 0$, mysqrt(2)**2 $\not{=} 2$\\
+            $\Rightarrow$ numerische Analyse: Feld, dass diese Fehler systematisch untersucht
+            \item Spezialfall: loss of precision \\
+            die Differenz von zwei $\underline{\text{fast}}$ gleichen Gleitkommazahlen hat viel weniger gültige Stellen als die Originalzahlen \\
+            \begin{tabular}{L{0.5cm} R{2cm}}
+            & 100.00001 \\
+            - & 100.00002 \\ \hline
+            - & 0.00001 \\
+            \end{tabular}\\
+
+            Bsp: p-q-Formel für quadratische Gleichungen:
+            \[x_{1,2} = -\frac{p}{2} \pm \sqrt{\frac{p^2}{4} - q} \]
+            Trick: ersetze Wurzel durch hypot$(a,b) = \sqrt{a^2 + b^2}$ \hspace*{1cm}(hypot $\rightarrow$ Hypothenuse)\\
+            \[ \text{if } abs(a) > abs(b):\]
+            \[\hspace*{1cm}\text{return } a \sqrt{1 + \frac{b^2}{a^2}}\]
+            \[ \text{else}:\]
+            \[\hspace*{1cm}\text{return } b \sqrt{\frac{a^2}{b^2} + 1} \]
+            Trick 2: verwende mehr Bits (double(64-bit) statt float(32-bit)) \\
+
+            Bsp.: (Hausaufgabe) Algorithmus von Archimedes zur Berechnung von $\pi$\\ \hspace*{0,9cm}(Resultat von Archimedes: $\pi \approx \frac{22}{7}$
+        \end{itemize}
+        \item Generieren von Testdaten $\widehat{=}$ vorberechnetes korrektes Ergebnis, mit dem man den Output vergleichen kann
+        \begin{itemize}
+            \item händisch für einfache Eingaben berechnen, z.B. Sortieren für N klein
+            \item verwende alternatives Verfahren: langsamen, aber einfachen Algorithmus oder anderes Programm
+            \item teste die inverse Funktion $y = sqrt(x) \Rightarrow y*y = x$
+            \item teste nicht das ganze Ergebnis, sondern seine Eigenschaften (Nachbedingung oder andere besondere Eigenschaften, die bei Bugs verletzt sein können)
+        \end{itemize}
+    \end{itemize}
+
+    \section{Korrektheitsbeweise}
+    \begin{itemize}
+        \item auf abstrakter Ebene (Pseudocode): beweise, dass der neue Algorithmus das Ziel erreicht, \\
+        $\Rightarrow$ wissenschaftl. Literatur über neue Alg., Lehrbücher, besonders Cormen, et.al.
+        \item auf Implementationsebene: beweise, dass die Implementation keinen Bug hat
+        \begin{itemize}
+            \item autonome U-Bahn 14 in Paris
+            \item Flugzeugbetriebssystem INTEGRITY 178B
+            \item Sicherheitsmerkmale von Chipkarten, allg. von Verschlüsselung
+        \end{itemize}
+    \end{itemize}
+
+    \textbf{Beispiel für Korrektheitsbeweis des Algorithmus Selection Sort}
+    \begin{itemize}
+        \item Prinzip der Induktion:
+        \begin{enumerate}
+            \item Induktionsanfang: beweise, dass best. Invarianten am Anfang des Alg. gelten
+            \item Induktionsschritt: beweise, dass die Invarianten nach Iteration t gelten, wenn sie nach Iteration (t-1) wahr waren
+            \item Induktionsschluss: beweise, dass aus der Gültigkeit der Invarianten nach der letzten Iteration die Gültigkeit der Nachbedingung folgt $\Rightarrow$ Algorithmus korrekt
+        \end{enumerate}
+        \item Beispiel:
+        \begin{itemize}[label={}]
+            \item Nachbedingung: für alle $i < $ k gilt: a[i] $<=$ a[k]
+            \item Invarianten (i) nach Iteration i ist das linke Teilarray a[0 : i+1] sortiert \\
+            \hspace*{2cm}(ii) alle Elemente im rechten Teilarray sind mindestens so groß wie im linken \\
+            \hspace*{2,6cm}Teilarray: max(a[0:i+1]) = a[i] $<=$ min(a[i+1:N])
+            \item Konventionen: leeres Teilarray ist sortiert und max([]) = min([]) = $- \infty$
+        \end{itemize}
+
+        \begin{minted}{python}
+def selection_sort(a):
+    N = len(a)                      #(1)
+    for i in range (N-1):
+        m = i                       #(2)
+        for k in range(i+1, N):     #(2)
+            if a[k] < a[m]:         #(2)
+                m = k               #(2)
+        a[i], a[m] = a[m], a[i]     #(2)
+        \end{minted}
+        \begin{enumerate}
+        \item Induktionsanfang: Invariante:
+        \begin{itemize}[label={}]
+        \item (i): das Array links von i ist sortiert: $\widehat{=}$ [] ist per Definition sortiert
+        \item (ii): $\underbrace{max(\text{links von i})}_{- \infty}\hspace*{1cm} \leq \underbrace{min(\text{rechts von i})}_{\text{Fall 1: } N = 0 \rightarrow - \infty |
+            \text{Fall 2: } N > 0 \rightarrow \text{ ganze Zahl}}$
+        \end{itemize}
+        \item Schritt: in Iteration i: nimm an, dass a[0:i] sortiert ist (i) und max(a[0:i]) $\leq$ min (a[i:N]) (ii)\\
+        beweise, dass das am Ende der Iteration für i+1 gilt
+        \begin{itemize}
+        \item nach innerer Schleife wissen wir: a[m] = min(a[i:N])
+        \item nach tauschen wissen wir: a[i] = min(a[i:N]) (*)
+        \item Aus Induktionsannahme (ii) wissen wir: max(a[0:i]) $\leq$ a[i] \\
+        $\Rightarrow$ a[0:i+1] ist sortiert $\Rightarrow$ Invariante (i) danach
+        \item aus (*) folgt außerdem: a[i] $\leq$ min([i+1:N]) $\Rightarrow$ max(a[0:i+1]) $\leq$ min(a[i+1:N]), max([a[0:i])
+        \end{itemize}
+        \item Induktionsende: nach der Schleife \verb| for i in range(N)|: hat i formal den Wert N\\
+        (in C/C++ hat i tatsächlich diesen Wert: int i = 0; for (i = 0; i $<$ N-1; i++) {} //hier hat i den Wert N \\
+        $\Rightarrow$ das Teilarray ist nach der letzten Iteration: a[0:N] == a, also das gesamte Array.\\
+        wegen Invariante (i) ist das linnke Teilarray immer sortiert \\
+        $\Rightarrow$ das ganze Array ist sortiert \hspace*{9cm} $\square$
+        \end{enumerate}
+    \end{itemize}
+
